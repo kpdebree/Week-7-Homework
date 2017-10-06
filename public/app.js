@@ -7,44 +7,47 @@
     storageBucket: "week-7-homework-454e0.appspot.com",
     messagingSenderId: "437004037928"
   };
+
   firebase.initializeApp(config);
+
+  var trainStartDesiplay;
 
   var database = firebase.database();
 
   $("#add-train-btn").on("click", function(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  var trainName = $("#train-name-input").val().trim();
-  var trainDest = $("#destination-input").val().trim();
-  var trainStart = moment($("#start-input").val().trim(), "HH:MM").format("X");
-  var trainRate = $("#frequency-input").val().trim();
+    var trainName = $("#train-name-input").val().trim();
+    var trainDest = $("#destination-input").val().trim();
+    var trainStart = moment($("#start-input").val().trim(), "HH:MM").format("X");
+    var trainRate = $("#frequency-input").val().trim();
 
-  var newTrain = {
-    name: trainName,
-    dest: trainDest,
-    start: trainStart,
-    rate: trainRate
-  };
+    var newTrain = {
+      name: trainName,
+      dest: trainDest,
+      start: trainStart,
+      rate: trainRate
+    };
 
-  console.log(newTrain)
+    console.log(newTrain)
 
-  // Uploads employee data to the database
-  database.ref().push(newTrain);
+    // Uploads employee data to the database
+    database.ref().push(newTrain);
 
-  // Logs everything to console
-  console.log(newTrain.name);
-  console.log(newTrain.dest);
-  console.log(newTrain.start);
-  console.log(newTrain.rate);
+    // Logs everything to console
+    console.log(newTrain.name);
+    console.log(newTrain.dest);
+    console.log(newTrain.start);
+    console.log(newTrain.rate);
 
-  // Alert
-  alert("Train successfully added");
+    // Alert
+    alert("Train successfully added");
 
-  // Clears all of the text-boxes
-  $("#train-name-input").val("");
-  $("#destination-input").val("");
-  $("#start-input").val("");
-  $("#frequency-input").val("");
+    // Clears all of the text-boxes
+    $("#train-name-input").val("");
+    $("#destination-input").val("");
+    $("#start-input").val("");
+    $("#frequency-input").val("");
 
 });
 
@@ -66,7 +69,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(trainRate);
 
   // Train Time
-  var trainStartDesiplay = moment.unix(trainStart).format("HH:MM");
+  trainStartDesiplay = moment.unix(trainStart).format("HH:MM");
 
   // Calculate the months worked using hardcore math
   // To calculate the months worked
